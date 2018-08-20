@@ -9,6 +9,8 @@ const userSchema = new Schema({
     lastName: String,
     email: String,
     password: String,
+    ip:String,
+    address:String,
     permissionLevel: Number
  });
  
