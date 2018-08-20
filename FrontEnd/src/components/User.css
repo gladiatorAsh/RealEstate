@@ -1,0 +1,40 @@
+html {
+    font-size: 16px;
+    height:100%;
+   
+   }
+   
+   *,
+   *:after,
+   *:before {
+    box-sizing: border-box;
+   }
+   
+   body {
+    font: 100% 'Roboto', arial, sans-serif;
+    height:100%;
+    background:#f7f9fc;
+    
+   }
+
+   .User{
+    background-color:#f7f9fc!important;
+   }
+
+   .flex-container{
+    margin-top: 2em;
+   /*
+   margin: 0 auto;*/
+   text-align: center;
+   flex: 1;
+   flex-direction: 'column';
+   
+   align-items: 'center';
+   width: 100%;
+   justify-content: center;
+   flex-shrink: 0;
+}  
+
+.flex-item{
+    padding: 1.4em;
+}

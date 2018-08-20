@@ -1,0 +1,47 @@
+html {
+  font-size: 16px;
+  height:100%;
+  background-color: black;
+ }
+ 
+ *,
+ *:after,
+ *:before {
+  box-sizing: border-box;
+ }
+ 
+ body {
+  font: 100% 'Roboto', arial, sans-serif;
+  height:100%;
+  background-color: black;
+  
+ }
+ 
+ card{
+  height:100%;
+  background-color: black;
+ }
+ 
+ img{
+  background-color: black;
+ }
+
+form {
+  margin-top: 8rem;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1),0 5px 15px rgba(0,0,0,.07);
+  background-color:black;
+  color:#7198ea;
+ }
+ 
+ img{
+   display: block;
+   margin:0 auto;
+ }
+
+ .center{
+   text-align: center;
+ }
