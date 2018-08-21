@@ -47,6 +47,12 @@ exports.insert = (req, res) => {
     });
  };
 
+ exports.patchAddressById = (req, res) => {
+    UserModel.patchUser(req.params.userId, req.body).then((result) => {
+            res.status(204).send({});
+    });
+ };
+
  exports.list = (req, res) => {
     let limit = req.query.limit && req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
     let page = 0;

@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const bodyParser = require('body-parser');
 const AuthorizationRouter = require('./routes/routes.config');
 const UsersRouter = require('./routes/users_routes');
+const ZillowRouter= require('./routes/zillow_routes');
 
 const app=express();
 
@@ -26,7 +27,7 @@ app.use(bodyParser.json());
 
 AuthorizationRouter.routesConfig(app);
 UsersRouter.routesConfig(app);
-
+ZillowRouter.routesConfig(app);
 
 // production error handler
 // no stacktraces leaked to user

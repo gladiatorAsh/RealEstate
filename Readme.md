@@ -1,0 +1,62 @@
+1. Zillow API -
+    a. http://www.zillow.com/webservice/GetSearchResults.htm
+        zws-id
+        address
+        citystatezip
+        rentzestimate
+
+        Rentzestimate is never seen in the o/p even if the documentation says so.
+
+    b. http://www.zillow.com/webservice/GetZestimate.htm
+        zws-id
+        zpid
+        rentzestimate
+
+        Need to know zpid. Will need two calls.
+    
+    c.http://www.zillow.com/webservice/GetDeepSearchResults.htm?
+        zws-id
+        address
+        citystatezip
+        rentzestimate
+
+    The last one works the best since I need to know only address and get both zestimate and rentzestimate.
+
+2. Trying to fetch rent estimates for the following addresses - 
+    1. 1314 The Alameda, Apt 132, San Jose, CA: 
+    2. 2925 SW 4th Ave, Portland, OR:
+    3. 2615 SE 75th Ave, Portland, OR:
+    4. 7245 N Newell Ave, Portland, OR:
+    5. 4305 SE Ash St,Portland, OR:
+    6. 7052 N Wilbur Ave, Portland, OR:
+    7. 7708 SE Springwater Dr,Portland, OR:
+    8. Test Not an Address
+    9. 1314 Thunderbrook Cir,Desoto, TX 75115
+    10. 101 Deerwood Dr,Sonora, TX 76950
+    11. 2221 S 9th St, Saint Joseph, MO 64503
+    12. East View Apartments,800 E 21st St, Falls City, NE 68355
+    13. 1806 Virginia Ave APT 3, North Bend, OR 97459
+    14. 88059 5th St APT 12,Veneta, OR 97487
+    15. 954 Albany St,Schenectady, NY 12307
+    16. 157 Oak St,Binghamton, NY 13905
+    17. 232 Birchwood Ave,Elmira Heights, NY 14903
+    18. Royal Plaza Apartments,85 Scotland Rd, Pueblo, CO 81001
+    19. 932 Peninsula Ave APT 302,San Mateo, CA 94401
+    20. 1726 S Grant St, San Mateo, CA 94402
+    21. 212 S El Camino Real, San Mateo, CA 94401
+    22. 301 Rita Ln,Crescent City, FL 32112
+    23. 1300 The Alameda, San Jose, CA 95126
+    24. 2114 Bigelow Ave, Seattle, WA 98109
+
+3. 
+
+
+
+
+
+
+
+
+
+
+
