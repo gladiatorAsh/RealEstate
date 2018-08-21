@@ -21,7 +21,8 @@ lib-cov
 build/Release
 
 # Dependency directories
-node_modules/
+BackEnd/node_modules/
+FrontEnd/node_modules/
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -44,6 +45,7 @@ typings/
 
 # dotenv environment variables file
 .env
+BackEnd/config/zillow.js
 
 #Other files
 *.pdf
