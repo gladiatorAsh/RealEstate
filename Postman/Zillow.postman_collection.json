@@ -1,0 +1,262 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Zillow",
+		"_postman_id": "6b591a35-b010-6dfd-bfd7-03bf35c906f2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"url": "localhost:3600/Users/5b7a3022914280a94f39e0e0",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjdhMzAyMjkxNDI4MGE5NGYzOWUwZTAiLCJlbWFpbCI6ImFzaHV0b3NoLnNpbmdoQHNqc3UuZWR1IiwicGVybWlzc2lvbkxldmVsIjoxLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6IkFzaHV0b3NoIFNpbmdoIiwicmVmcmVzaEtleSI6Ijc2bTlkL0YxeitGM2FlZWtvN2ppOVE9PSIsImlhdCI6MTUzNDczNDQ2Nn0.1-PSBmfqyCvPtynzOtvZEg4rA3PWtz8vAOlUsvgKYMI",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Auth",
+			"request": {
+				"url": "localhost:3600/auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"ashutosh.singh@sjsu.edu\",\n\t\"password\":\"pa$$word4r2d2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Zillow Rent Estimate",
+			"request": {
+				"url": "localhost:3600/zillow/getRentEstimate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":\"5b7a3022914280a94f39e0e0\",\n\t\"address\": \"2114 Bigelow Ave\",\n\t\"citystatezip\":\"Seattle, WA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST Users",
+			"request": {
+				"url": "localhost:3600/Users/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Ashutosh\",\n\t\"lastName\": \"Singh\",\n\t\"email\": \"ashutosh.singh@sjsu.edu\",\n\t\"password\":\"pa$$word4r2d2\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update Users",
+			"request": {
+				"url": "localhost:3600/Users/5b7a3022914280a94f39e0e0",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjdhMzAyMjkxNDI4MGE5NGYzOWUwZTAiLCJlbWFpbCI6ImFzaHV0b3NoLnNpbmdoQHNqc3UuZWR1IiwicGVybWlzc2lvbkxldmVsIjoxLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6IkFzaHV0b3NoIFNpbmdoIiwicmVmcmVzaEtleSI6Ijc2bTlkL0YxeitGM2FlZWtvN2ppOVE9PSIsImlhdCI6MTUzNDczNDQ2Nn0.1-PSBmfqyCvPtynzOtvZEg4rA3PWtz8vAOlUsvgKYMI",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Ashutosh\",\n\t\"lastName\": \"Snow\",\n\t\"email\": \"ashutosh.singh@sjsu.edu\",\n\t\"password\":\"pa$$word4r2d2\",\n\t\"ip\":\"73.158.50.168\",\n\t\"phone\": \"6692612485\",\n\t\"address\":\"3799, S Las Vegas Blvd,Las Vegas,NV\",\n\t\"permissionLevel\": 1,\n    \"monthlyHigh\": 6160,\n    \"monthlyLow\": 1895,\n    \"rentZestimate\": 5\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetDeepSearchResults",
+			"request": {
+				"url": {
+					"raw": "http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id={{ZWSID}}&address=2114+Bigelow+Ave&citystatezip=Seattle,+WA&rentzestimate=true",
+					"protocol": "http",
+					"host": [
+						"www",
+						"zillow",
+						"com"
+					],
+					"path": [
+						"webservice",
+						"GetDeepSearchResults.htm"
+					],
+					"query": [
+						{
+							"key": "zws-id",
+							"value": "{{ZWSID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "address",
+							"value": "2114+Bigelow+Ave",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "citystatezip",
+							"value": "Seattle,+WA",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "rentzestimate",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Zestimate",
+			"request": {
+				"url": {
+					"raw": "http://www.zillow.com/webservice/GetZestimate.htm?zws-id={{ZWSID}}&zpid=2091269736&rentzestimate=true",
+					"protocol": "http",
+					"host": [
+						"www",
+						"zillow",
+						"com"
+					],
+					"path": [
+						"webservice",
+						"GetZestimate.htm"
+					],
+					"query": [
+						{
+							"key": "zws-id",
+							"value": "{{ZWSID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "zpid",
+							"value": "2091269736",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "rentzestimate",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetSearchResults",
+			"request": {
+				"url": {
+					"raw": "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id={{ZWSID}}&address=1300+The+Alameda+San Jose+CA &citystatezip=95126&rentzestimate=true",
+					"protocol": "http",
+					"host": [
+						"www",
+						"zillow",
+						"com"
+					],
+					"path": [
+						"webservice",
+						"GetSearchResults.htm"
+					],
+					"query": [
+						{
+							"key": "zws-id",
+							"value": "{{ZWSID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "address",
+							"value": "1300+The+Alameda+San Jose+CA ",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "citystatezip",
+							"value": "95126",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "rentzestimate",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

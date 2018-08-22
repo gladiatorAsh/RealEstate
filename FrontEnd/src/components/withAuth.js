@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthService from './AuthService';
 
 export default function withAuth(AuthComponent) {
-    const domain="http://localhost:8000";
+    const domain="http://localhost:3600";
      
     const Auth = new AuthService(domain);
 

@@ -1,46 +1,24 @@
 import decode from 'jwt-decode';
-//import $ from "jquery";
 export default class AuthService {
     // Initializing important variables
     constructor(domain) {
-        this.domain = domain || 'http://localhost:8000' // API server domain
+        this.domain = domain || 'http://localhost:3600' // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
     }
 
-    login(username, password) {
+    login(email, password) {
 
         var state = {
-            email: username,
+            email: email,
             password: password
           };
-          /*
-        // Get a token from api server using the fetch api
-        return this.fetch(`${this.domain}/login`, {
-            method: 'POST',
-            dataType:'json',
-            body: state
-        }).then(res => {
-            this.setToken(res.token) // Setting the token in localStorage
-            return Promise.resolve(res);
-        })*/
-        console.log('state is',state);
-        /*$.post({
-            url:`${this.domain}/login`,
-            data:state,
-            dataType:'json',
-            success:function(result){
-                console.log(result);
-                this.setToken(result.sessionToken);
-                return Promise.resolve(result.sessionToken);
-            },
-            error:function(err){
-                console.log(err);
-            }
-        });*/
         
-        return this.fetch(`${this.domain}/login`, {
+          console.log('state is',state);
+        
+        
+        return this.fetch(`${this.domain}/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -76,19 +54,20 @@ export default class AuthService {
     setToken(res) {
         console.log('Token set'+ res);
         // Saves user token to localStorage
-        localStorage.setItem('id_token', res.sessionToken);
-        localStorage.setItem('user_id', res._id);
+        localStorage.setItem('token', res.accessToken);
+        localStorage.setItem('refresh_token', res.refreshToken);
+        localStorage.setItem('user_id', res.userId);
     }
 
     getToken() {
-        console.log('Token retrieved'+ localStorage.getItem('id_token'));
-        // Retrieves the user token from localStorage
-        return localStorage.getItem('id_token');
+        console.log('Token retrieved'+ localStorage.getItem('token'));
+        return localStorage.getItem('token');
     }
 
     logout() {
         // Clear user token and profile data from localStorage
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('token');
+        localStorage.removeItem('refresh_token');
         localStorage.removeItem('user_id');
     }
 
@@ -122,7 +101,6 @@ export default class AuthService {
     }
 
     _checkStatus(response) {
-
         // raises an error in case response status is not a success
         if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
             return response;

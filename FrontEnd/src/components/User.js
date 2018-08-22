@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./User.css";
-import Logo from "./lockLogo.svg";
 import $ from "jquery";
-//import { createStackNavigator } from 'react-navigation';
-//import "../navigation/nav";
 import AuthService from './AuthService';
 import withAuth from './withAuth';
 
@@ -13,18 +9,20 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password:"",
-      street:"",
-      city:"",
-      state:"",
-      phone:""   
+      phone:"",
+      permissionLevel:"",
+      address:"",
+      citystatezip:"",
+      ip:""
     };
 
-    this.Auth = new AuthService();
-    this.domain ='http://localhost:8000' // API server domain
+    
+    this.domain ='http://localhost:3600' // API server domain
+    this.Auth = new AuthService(this.domain);
     this.id="";
 
     this.handleChange=this.handleChange.bind(this);
@@ -34,7 +32,7 @@ class Login extends Component {
   componentDidMount() {
     clearInterval();
        if(this.Auth.loggedIn())
-            this.getDetails()
+            this.getDetails();
     }
 
   validateForm() {
@@ -62,9 +60,30 @@ class Login extends Component {
     });
   }
 
+  fetch(url,headers, options) {
+    
+    return fetch(url, {
+        headers,
+        options
+    })
+        .then(this._checkStatus)
+        .then(response => response.json())
+}
+
+_checkStatus(response) {
+  console.log(response);
+  // raises an error in case response status is not a success
+  if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
+      return response;
+  } else {
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
+  }
+}
   updateState(newState){
     console.log(newState);
-    this.setState({fname:newState.fname,lname:newState.lname,
+    this.setState({firstName:newState.firstName,lastName:newState.lastName,
       email:newState.email,password:newState.password,street:newState.street,
       city:newState.city,state:newState.state,phone:newState.phone
     });
@@ -73,12 +92,33 @@ class Login extends Component {
   getDetails(){
     this.id=localStorage.getItem('user_id');
     var updateState=this.updateState;
-    $.get(`${this.domain}/users/${this.id}`, function( data) {
-      updateState(data);
-      console.log("data",data);
-    });
 
+    const xhrHeaders = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization':'Bearer '+ this.Auth.getToken()
   }
+
+  const loc=this.domain+"/Users/"+this.id;
+  console.log("Loc",loc);
+
+    $.ajax({
+      url: loc,
+      type: 'GET',
+      dataType: 'json',
+      headers: xhrHeaders,
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) {
+        updateState(result);
+        console.log("data",result);
+      },
+      error: function (error) {
+          console.log(error);
+      }
+  });
+
+
+    }
 
   handleChange = event => {
     this.setState({
@@ -101,96 +141,55 @@ class Login extends Component {
   render() {
     
     return (
-        
-      <div className="User ">
-      
-        <form onSubmit={this.goDashboard} className="flex-container">
-        <img src={Logo} alt=""/>
-        <FormGroup className="flex-item" controlId="fname" bsSize="small">
-            <ControlLabel>First Name</ControlLabel>
-            <FormControl
-              autoFocus
-              type="text"
-              value={this.state.fname}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="lname" bsSize="small">
-            <ControlLabel>Last Name</ControlLabel>
-            <FormControl
-              autoFocus
-              type="text"
-              value={this.state.lname}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-              type="password"
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="street" bsSize="large">
-            <ControlLabel>Street Address</ControlLabel>
-            <FormControl
-              value={this.state.street}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-              type="text"
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="city" bsSize="large">
-            <ControlLabel>City</ControlLabel>
-            <FormControl
-              value={this.state.city}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-              type="text"
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="state" bsSize="large">
-            <ControlLabel>State</ControlLabel>
-            <FormControl
-              value={this.state.state}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-              type="text"
-            />
-          </FormGroup>
-          <FormGroup className="flex-item" controlId="phone" bsSize="large">
-            <ControlLabel>Phone</ControlLabel>
-            <FormControl
-              value={this.state.phone}
-              onChange={this.handleChange}
-              onBlur={this.handleSubmit}
-              type="text"
-            />
-            
-          </FormGroup>
-          <Button className="flex-item"
-            block
-            bsSize="large"
-            disabled={!this.validateForm()}
-            type="submit"
-          >
-            Back to Home
-          </Button>
-        </form>
+      <form className="form-card">
+      <fieldset className="form-fieldset">
+          <div className="form-element form-input">
+              <input id="firstname" class="form-element-field" placeholder="Please fill in your first name" type="input" required/>
+              <div className="form-element-bar"></div>
+              <label className="form-element-label" for="firstname">First Name</label>
+          </div>
+          <div className="form-element form-input">
+              <input id="lastname" className="form-element-field" placeholder="Please fill in your last name" type="input" required/>
+              <div className="form-element-bar"></div>
+              <label className="form-element-label" for="lastname">Last Name</label>
+          </div>
+          <div className="form-element form-input">
+              <input id="email" class="form-element-field" placeholder="Please fill in your email" type="email" required/>
+              <div className="form-element-bar"></div>
+              <label className="form-element-label" for="email">Name</label>
+          </div>
+          <div className="form-element form-input">
+              <input id="phone" class="form-element-field" placeholder="Please fill in your phone" type="phone" required/>
+              <div className="form-element-bar"></div>
+              <label className="form-element-label" for="phone">Phone</label>
+          </div>
+          <div className="form-element form-input">
+              <input id="address" class="form-element-field" placeholder="Please fill in your address" type="text" required/>
+              <div className="form-element-bar"></div>
+              <label className="form-element-label" for="address">Address</label>
+          </div>
+          <div className="form-element form-input">
+              <input id="city" class="form-element-field" placeholder="Please fill in your city" type="text" required/>
+              <div className="form-element-bar"></div>
+              <label class="form-element-label" for="city">City</label>
+
+          className</div>
+          <div className="form-element form-input">
+              <input id="state" className="form-element-field" placeholder="Please fill in your state" type="text" required/>
+              <div class="form-element-bar"></div>
+              <label class="form-element-label" for="state">City</label>
+          </div>
+          <div class="form-element form-input">
+              <input id="zipcode" class="form-element-field" placeholder="Please fill in your zipcode" type="number" required/>
+              <div class="form-element-bar"></div>
+              <label class="form-element-label" for="state">zipcode</label>
+          </div>
+      </fieldset>
+      <div class="form-actions">
+          <button class="form-btn" type="submit">Send inquiry</button>
+          <button class="form-btn-cancel -nooutline" type="reset">Cancel</button>
       </div>
+  </form> 
     );
   }
 }

@@ -1,4 +1,25 @@
-1. Zillow API -
+    The purpose of the application is to test out Zillow APIs. It is currently under progress. to know more about Zillow APIs, please see -
+
+1.   Features built-
+        Backend
+            1. API call to get rentzestimate if available or approximate it.
+            2. User authentication and authorization.
+            3. Model validation using mongoose
+            
+        Front end 
+            1. User page to login
+            2. User page to update user details
+2.  To Do -
+    1. Organize front-end code
+    2. Improve css
+    3. Add validation on front-end
+    4. Handle and log errors
+    5. Implement circuit breaker pattern
+    6. Use phone and email verification service
+    7. Add user account creation page
+    8. Refresh token to generate new token
+
+3. Zillow API -
     a. http://www.zillow.com/webservice/GetSearchResults.htm
         zws-id
         address
@@ -22,14 +43,14 @@
 
     The last one works the best since I need to know only address and get both zestimate and rentzestimate.
 
-2. Trying to fetch rent estimates for the following addresses - 
-    1. 1314 The Alameda, Apt 132, San Jose, CA: 
-    2. 2925 SW 4th Ave, Portland, OR:
-    3. 2615 SE 75th Ave, Portland, OR:
-    4. 7245 N Newell Ave, Portland, OR:
-    5. 4305 SE Ash St,Portland, OR:
-    6. 7052 N Wilbur Ave, Portland, OR:
-    7. 7708 SE Springwater Dr,Portland, OR:
+4. Trying to fetch rent estimates for the following addresses - 
+    1. 1314 The Alameda, Apt 132, San Jose, CA
+    2. 2925 SW 4th Ave, Portland, OR
+    3. 2615 SE 75th Ave, Portland, OR
+    4. 7245 N Newell Ave, Portland, OR
+    5. 4305 SE Ash St,Portland, OR
+    6. 7052 N Wilbur Ave, Portland, OR
+    7. 7708 SE Springwater Dr,Portland, OR
     8. Test Not an Address
     9. 1314 Thunderbrook Cir,Desoto, TX 75115
     10. 101 Deerwood Dr,Sonora, TX 76950
@@ -48,7 +69,7 @@
     23. 1300 The Alameda, San Jose, CA 95126
     24. 2114 Bigelow Ave, Seattle, WA 98109
 
-3. 
+ 
 
 
 

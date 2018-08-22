@@ -11,7 +11,7 @@ class Login extends Component {
     this.Auth = new AuthService();
 
     this.state = {
-      username: "",
+      email: "",
       password: ""
     };
   }
@@ -20,7 +20,7 @@ class Login extends Component {
     document.body.style.backgroundColor = "black";
 
     if(this.Auth.loggedIn())
-        this.props.history.replace('/Dashboard');
+        this.props.history.replace('/User');
 }
 
 componentWillUnmount(){
@@ -29,18 +29,18 @@ componentWillUnmount(){
 
 
   validateForm() {
-    return this.state.username.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.password.length > 5;
   }
 
   postLogin(){
       console.log(this.state);
 
-      this.Auth.login(this.state.username,this.state.password)
+      this.Auth.login(this.state.email,this.state.password)
       .then(res =>{
-         this.props.history.replace('/Dashboard');
+         this.props.history.replace('/User');
       })
       .catch(err =>{
-          alert(err);
+          alert('Invalid email or password');
       })
 
 
@@ -66,12 +66,12 @@ componentWillUnmount(){
         <img src={Logo} alt=""/>
         <form onSubmit={this.handleSubmit} className="center">
         
-          <FormGroup controlId="username" bsSize="large">
+          <FormGroup controlId="email" bsSize="large">
             <ControlLabel>EMAIL ADDRESS</ControlLabel>
             <FormControl
               autoFocus
               type="email"
-              value={this.state.username}
+              value={this.state.email}
               onChange={this.handleChange}
             />
           </FormGroup>
