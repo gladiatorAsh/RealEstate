@@ -9,9 +9,14 @@ const userSchema = new Schema({
     lastName: String,
     email: String,
     password: String,
-    ip:String,
-    address:String,
-    permissionLevel: Number
+    phone:Number,
+    ip: String,
+    address: String,
+    permissionLevel: Number,
+    rentZestimate: Number,
+    monthlyLow: Number,
+    monthlyHigh: Number,
+    userExpectation: Number
  });
  
  const User = mongoose.model('Users', userSchema);
@@ -33,6 +38,7 @@ exports.findById = (id) => {
 
 exports.patchUser = (id, userData) => {
     return new Promise((resolve, reject) => {
+        
         User.findById(id, function (err, user) {
             if (err) reject(err);
 

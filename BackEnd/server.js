@@ -32,8 +32,7 @@ ZillowRouter.routesConfig(app);
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-	res.status(err.status || 500);
-	res.render('error', {
+	res.status(err.status || 500).send({
 		message : err.message,
 		error : {}
 	});
