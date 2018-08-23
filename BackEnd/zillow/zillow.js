@@ -1,9 +1,11 @@
 const request = require('request');
 const querystring = require("querystring");
+const math = require('mathjs');
 const parseString = require('xml2js').parseString;
+
 const UserModel = require('../users/models/user');
 const config = require('../config/zillow');
-const math = require('mathjs');
+const mailer = require('../mailer/mailer');
 
 //ToDO: Remove if obsolete
 exports.getRentEstimate = (req, res) => {
@@ -37,6 +39,7 @@ exports.postUserEstimate = (req, res) => {
         UserModel.patchUser(req.body.userId, {
             "userExpectation": data
         }).then((result) => {
+            mailer.sendEmail(result);
             res.status(200).send('success');
         });
 

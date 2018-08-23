@@ -4,6 +4,7 @@ module.exports = {
     "apiEndpoint": "http;//localhost:3600",
     "jwt_secret": "zillow",
     "jwt_expiration_in_seconds": 36000,
+    "email":"zillowtest@fastmail.com",
     "environment": "dev",
     "permissionLevels": {
         "NORMAL_USER": 1,

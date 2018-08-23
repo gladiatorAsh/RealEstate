@@ -16,23 +16,23 @@ const FREE = config.permissionLevels.NORMAL_USER;
 exports.routesConfig = function (app) {
 
     app.post('/zillow/getRentEstimate', [
-        Validation.validJWTNeeded,
-        Permission.minimumPermissionLevelRequired(FREE),
-        Permission.onlySameUserOrAdminCanDoThisAction,
+        //Validation.validJWTNeeded,
+        //Permission.minimumPermissionLevelRequired(FREE),
+        //Permission.onlySameUserOrAdminCanDoThisAction,
         ZillowController.getRentZestimate
     ]);
 
     app.post('/zillow/postUserEstimate', [
-        Validation.validJWTNeeded,
-        Permission.minimumPermissionLevelRequired(FREE),
+        //Validation.validJWTNeeded,
+        //Permission.minimumPermissionLevelRequired(FREE),
         //Permission.onlySameUserOrAdminCanDoThisAction,
         ZillowController.postUserEstimate
     ]);
 
     app.patch('/zillow/users/:userId', [
-        Validation.validJWTNeeded,
-        Permission.minimumPermissionLevelRequired(FREE),
-        Permission.onlySameUserOrAdminCanDoThisAction,
+        //Validation.validJWTNeeded,
+        //Permission.minimumPermissionLevelRequired(FREE),
+        //Permission.onlySameUserOrAdminCanDoThisAction,
         UsersController.patchAddressById
     ]);
 };

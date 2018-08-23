@@ -29,7 +29,9 @@ class User extends Component {
             expected: "",
             rentzestimate: "",
             lowrentzestimate: "",
-            highrentzestimate: ""
+            highrentzestimate: "",
+            isEnquiryBtnDisabled:false,
+            isSubmitBtnDisabled:true
         };
 
         this.id = "";
@@ -37,6 +39,7 @@ class User extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.updateState = this.updateState.bind(this);
         this.postZillow = this.postZillow.bind(this);
+        this.postExpected=this.postExpected.bind(this);
     }
 
     componentDidMount() {
@@ -66,6 +69,7 @@ class User extends Component {
             return;
         }
 
+        
         //ToDo: currently directly using zip, can make zip optional if both city and state are present
         let tempObj = {
             "userId": this.id,
@@ -83,11 +87,16 @@ class User extends Component {
                 'Content-Type': 'application/json'
             },
             success: (result) => {
-                console.log('Successfully called Rent Estimate',result);
-                
+               
                 if(result==null){
                     alert('Not a valid address');
                 }else{
+            
+                    this.setState({
+                        isEnquiryBtnDisabled:true,
+                        isSubmitBtnDisabled:false
+                    });
+            
                     this.updateState(result);
                 }
             },
@@ -98,13 +107,6 @@ class User extends Component {
         });
 
     }
-
-    updateUI(result) {
-
-
-
-    }
-
 
     postUserData() {
 
@@ -180,10 +182,6 @@ class User extends Component {
         }
     }
     updateState(newState) {
-        console.log(newState.amount);
-        console.log(newState.valuationRange?newState.valuationRange.low:0);
-        console.log(newState.valuationRange?newState.valuationRange.high:0);
-        //console.log(newState.rentzestimate);
 
         this.setState({
             firstName: newState.firstName,
@@ -244,26 +242,35 @@ class User extends Component {
             'Authorization': 'Bearer ' + this.Auth.getToken()
         }
 
+
+        let obj={
+            "userId":this.id,
+            "userExpectation":this.state.userExpectation? this.state.userExpectation:0
+        }
+
         $.ajax({
             url: this.domain + "/zillow/postUserEstimate",
             type: 'POST',
             dataType: 'json',
-            headers: xhrHeaders,
             contentType: "application/json",
+            headers: xhrHeaders,
+            data:JSON.stringify(obj),
             success: function (result) {
                 alert('You will be sent an email about this property!!');
+                this.setState({
+                    isSubmitBtnDisabled:true
+                });
+                this.props.history.replace('/Contact');
             },
             error: function (error) {
                 console.log(error);
+                this.props.history.replace('/Contact');
             }
         });
-
-
     }
 
     handleSubmit = event => {
         event.preventDefault();
-        //this.postUserData();
         this.postZillow();
     }
 
@@ -328,7 +335,7 @@ class User extends Component {
             </fieldset> 
             
             <div className = "form-actions" >
-            <button className = "form-btn" type = "submit" > Send inquiry </button> 
+            <button className = "form-btn" type = "submit" disabled={this.state.isEnquiryBtnDisabled}> Send inquiry </button> 
             </div > 
             
             <div>
@@ -345,8 +352,8 @@ class User extends Component {
                 </div>  
             
                 <div>
-                <span> Expected Rent: $ </span> <input type="text" id="expected" value={this.state.expected} onChange={this.postExpected} />
-                <button className = "form-btn" type = "button" > Submit </button> 
+                <span> Expected Rent: $ </span> <input type="number" id="expected" value={this.state.expected}  />
+                <button className = "form-btn" type = "button" disabled={this.state.isSubmitBtnDisabled} onClick={this.postExpected}> Submit </button> 
                 </div>  
             </div >
 
