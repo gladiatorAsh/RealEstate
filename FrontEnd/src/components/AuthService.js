@@ -5,7 +5,6 @@ export default class AuthService {
         this.domain = domain || 'http://localhost:3600' // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
         this.login = this.login.bind(this)
-        this.getProfile = this.getProfile.bind(this)
     }
 
     login(email, password) {
@@ -39,6 +38,7 @@ export default class AuthService {
 
     isTokenExpired(token) {
         try {
+            return true;
             const decoded = decode(token);
             if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
                 return true;
@@ -68,14 +68,6 @@ export default class AuthService {
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user_id');
     }
-
-    getProfile() {
-
-        console.log('Token decoded' + this.getToken());
-        // Using jwt-decode npm package to decode the token
-        return decode(this.getToken());
-    }
-
 
     fetch(url, options) {
         // performs api calls sending the required authentication headers

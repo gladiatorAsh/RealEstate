@@ -1,16 +1,32 @@
     The purpose of the application is to test out Zillow APIs. It is currently under progress. to know more about Zillow APIs, please see -
     https://www.zillow.com/
 
+
+Testing Process:
+
+1. Run a mongo container. Update the url in config/db.js
+2. Run node server on 3600 and react on 3000
+3. Update config with email, pwd and Zillow token
+4. Creation of account is via API, use created account.
+        username:ashutosh.singh@sjsu.edu
+        password:
+
+
+
 1.   Features built-
+        
         Backend
+
             1. API call to get rentzestimate if available or approximate it.
             2. User authentication and authorization.
-            3. Model validation using mongoose
-            4. Two tiered service access - Paid and Free
+            3. Model validation using mongoose.
+            4. Two tiered service access - Paid and Free.
+            5. Email sent once data has been processed.
             
         Front end 
-            1. User page to login
-            2. User page to update user details
+        
+            1. User page to login.
+            2. User page to update user details.
 
 2.  To Do -
     1. Organize front-end code

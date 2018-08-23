@@ -5,6 +5,7 @@ import "./User.css";
 import $ from "jquery";
 import AuthService from './AuthService';
 import withAuth from './withAuth';
+import zillowLogo from "./Zillowlogo_200x50.gif"
 
 class User extends Component {
     constructor(props) {
@@ -344,17 +345,21 @@ class User extends Component {
                 </div> 
                 
                 <div>
-                <span> Low: $ </span> <span id="lowrentzestimate">{this.state.lowrentzestimate}</span>
+                <span> Rent Zestimate Low: $ </span> <span id="lowrentzestimate">{this.state.lowrentzestimate}</span>
                 </div>  
             
                 <div>
-                <span> High: $ </span> <span id="highrentzestimate">{this.state.highrentzestimate}</span>
+                <span> Rent Zestimate High: $ </span> <span id="highrentzestimate">{this.state.highrentzestimate}</span>
                 </div>  
             
                 <div>
                 <span> Expected Rent: $ </span> <input type="number" id="expected" value={this.state.expected}  />
                 <button className = "form-btn" type = "button" disabled={this.state.isSubmitBtnDisabled} onClick={this.postExpected}> Submit </button> 
                 </div>  
+
+                <div>
+                    <img src = { zillowLogo } alt = "Real Estate on Zillow" href="http://www.zillow.com/" />
+                </div>
             </div >
 
         </form>
