@@ -20,7 +20,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjdhMzAyMjkxNDI4MGE5NGYzOWUwZTAiLCJlbWFpbCI6ImFzaHV0b3NoLnNpbmdoQHNqc3UuZWR1IiwicGVybWlzc2lvbkxldmVsIjoxLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6IkFzaHV0b3NoIFNpbmdoIiwicmVmcmVzaEtleSI6Ijc2bTlkL0YxeitGM2FlZWtvN2ppOVE9PSIsImlhdCI6MTUzNDczNDQ2Nn0.1-PSBmfqyCvPtynzOtvZEg4rA3PWtz8vAOlUsvgKYMI",
+						"value": "{{Token}}",
 						"description": ""
 					}
 				],
@@ -50,20 +50,44 @@
 			"response": []
 		},
 		{
-			"name": "Get Zillow Rent Estimate",
+			"name": "Post User Estimate",
 			"request": {
-				"url": "localhost:3600/zillow/getRentEstimate",
+				"url": {
+					"raw": "localhost:3600/zillow/postUserEstimate?Authorization={{Token}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3600",
+					"path": [
+						"zillow",
+						"postUserEstimate"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "{{Token}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"value": "application/json",
 						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjdhMzAyMjkxNDI4MGE5NGYzOWUwZTAiLCJlbWFpbCI6ImFzaHV0b3NoLnNpbmdoQHNqc3UuZWR1IiwicGVybWlzc2lvbkxldmVsIjoxLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6IkFzaHV0b3NoIFNpbmdoIiwicmVmcmVzaEtleSI6Ijc2bTlkL0YxeitGM2FlZWtvN2ppOVE9PSIsImlhdCI6MTUzNDczNDQ2Nn0.1-PSBmfqyCvPtynzOtvZEg4rA3PWtz8vAOlUsvgKYMI",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"userId\":\"5b7a3022914280a94f39e0e0\",\n\t\"address\": \"2114 Bigelow Ave\",\n\t\"citystatezip\":\"Seattle, WA\"\n}"
+					"raw": "{\n\t\"userId\":\"5b7a3022914280a94f39e0e0\",\n\t\"userExpectation\":90\n}"
 				},
 				"description": ""
 			},
@@ -102,7 +126,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjdhMzAyMjkxNDI4MGE5NGYzOWUwZTAiLCJlbWFpbCI6ImFzaHV0b3NoLnNpbmdoQHNqc3UuZWR1IiwicGVybWlzc2lvbkxldmVsIjoxLCJwcm92aWRlciI6ImVtYWlsIiwibmFtZSI6IkFzaHV0b3NoIFNpbmdoIiwicmVmcmVzaEtleSI6Ijc2bTlkL0YxeitGM2FlZWtvN2ppOVE9PSIsImlhdCI6MTUzNDczNDQ2Nn0.1-PSBmfqyCvPtynzOtvZEg4rA3PWtz8vAOlUsvgKYMI",
+						"value": "{{Token}}",
 						"description": ""
 					}
 				],
@@ -118,7 +142,7 @@
 			"name": "GetDeepSearchResults",
 			"request": {
 				"url": {
-					"raw": "http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id={{ZWSID}}&address=2114+Bigelow+Ave&citystatezip=Seattle,+WA&rentzestimate=true",
+					"raw": "http://www.zillow.com/webservice/GetDeepSearchResults.htm?zws-id={{ZWSID}}&address=2114+Bigelow+Ave&citystatezip=98109&rentzestimate=true",
 					"protocol": "http",
 					"host": [
 						"www",
@@ -144,7 +168,7 @@
 						},
 						{
 							"key": "citystatezip",
-							"value": "Seattle,+WA",
+							"value": "98109",
 							"equals": true,
 							"description": ""
 						},
@@ -254,6 +278,31 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Rent Estimate",
+			"request": {
+				"url": "localhost:3600/zillow/getRentEstimate",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{Token}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":\"5b7a3022914280a94f39e0e0\",\n\t\"address\": \"157 Oak St\",\n\t\"citystatezip\":\"13905\"\n}"
+				},
 				"description": ""
 			},
 			"response": []

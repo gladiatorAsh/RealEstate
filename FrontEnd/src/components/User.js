@@ -249,6 +249,8 @@ class User extends Component {
             "userExpectation":this.state.userExpectation? this.state.userExpectation:0
         }
 
+        let global=this;
+
         $.ajax({
             url: this.domain + "/zillow/postUserEstimate",
             type: 'POST',
@@ -261,11 +263,11 @@ class User extends Component {
                 this.setState({
                     isSubmitBtnDisabled:true
                 });
-                this.props.history.replace('/Contact');
+                global.props.history.replace('/Contact');
             },
             error: function (error) {
                 console.log(error);
-                this.props.history.replace('/Contact');
+                global.props.history.replace('/Contact');
             }
         });
     }

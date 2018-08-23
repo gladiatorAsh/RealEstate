@@ -7,11 +7,8 @@ Testing Process:
 1. Run a mongo container. Update the url in config/db.js
 2. Run node server on 3600 and react on 3000
 3. Update config with email, pwd and Zillow token
-4. Creation of account is via API, use created account.
-        username:ashutosh.singh@sjsu.edu
-        password:
-
-
+4. Creation of account is via API, hence import Postman collection. Create user by the Post Users API.
+5. Use this user to login
 
 1.   Features built-
         
@@ -24,7 +21,7 @@ Testing Process:
             5. Email sent once data has been processed.
             
         Front end 
-        
+
             1. User page to login.
             2. User page to update user details.
 

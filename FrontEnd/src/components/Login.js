@@ -64,7 +64,7 @@ class Login extends Component {
             <div className = "Login" >
                 <div className = "card" >
                 
-                <img src = { Logo } alt = "Login Image" />
+                <img src = { Logo } alt = "Login" />
 
                     <form onSubmit = { this.handleSubmit } className = "center" >
 
