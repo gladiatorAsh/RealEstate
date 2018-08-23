@@ -1,23 +1,27 @@
     The purpose of the application is to test out Zillow APIs. It is currently under progress. to know more about Zillow APIs, please see -
+    https://www.zillow.com/
 
 1.   Features built-
         Backend
             1. API call to get rentzestimate if available or approximate it.
             2. User authentication and authorization.
             3. Model validation using mongoose
+            4. Two tiered service access - Paid and Free
             
         Front end 
             1. User page to login
             2. User page to update user details
+
 2.  To Do -
     1. Organize front-end code
     2. Improve css
     3. Add validation on front-end
-    4. Handle and log errors
+    4. Handle and log errors on both front-end and back-end
     5. Implement circuit breaker pattern
     6. Use phone and email verification service
     7. Add user account creation page
     8. Refresh token to generate new token
+    9. Dockerize and deploy
 
 3. Zillow API -
     a. http://www.zillow.com/webservice/GetSearchResults.htm
@@ -51,7 +55,7 @@
     5. 4305 SE Ash St,Portland, OR
     6. 7052 N Wilbur Ave, Portland, OR
     7. 7708 SE Springwater Dr,Portland, OR
-    8. Test Not an Address
+    8. Test Not an Address : Returns null.
     9. 1314 Thunderbrook Cir,Desoto, TX 75115
     10. 101 Deerwood Dr,Sonora, TX 76950
     11. 2221 S 9th St, Saint Joseph, MO 64503
@@ -65,9 +69,9 @@
     19. 932 Peninsula Ave APT 302,San Mateo, CA 94401
     20. 1726 S Grant St, San Mateo, CA 94402
     21. 212 S El Camino Real, San Mateo, CA 94401
-    22. 301 Rita Ln,Crescent City, FL 32112
+    22. 301 Rita Ln,Crescent City, FL 32112 : Only Zestimate available 
     23. 1300 The Alameda, San Jose, CA 95126
-    24. 2114 Bigelow Ave, Seattle, WA 98109
+    24. 2114 Bigelow Ave, Seattle, WA 98109 : RentZestimate available
 
  
 

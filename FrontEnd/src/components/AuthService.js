@@ -1,6 +1,6 @@
 import decode from 'jwt-decode';
 export default class AuthService {
-    // Initializing important variables
+
     constructor(domain) {
         this.domain = domain || 'http://localhost:3600' // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
@@ -13,17 +13,17 @@ export default class AuthService {
         var state = {
             email: email,
             password: password
-          };
-        
-          console.log('state is',state);
-        
-        
+        };
+
+        console.log('state is', state);
+
+
         return this.fetch(`${this.domain}/auth`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              },
+            },
             body: JSON.stringify(state)
         }).then(res => {
             this.setToken(res) // Setting the token in localStorage
@@ -42,17 +42,15 @@ export default class AuthService {
             const decoded = decode(token);
             if (decoded.exp < Date.now() / 1000) { // Checking if token is expired. N
                 return true;
-            }
-            else
+            } else
                 return false;
-        }
-        catch (err) {
+        } catch (err) {
             return false;
         }
     }
 
     setToken(res) {
-        console.log('Token set'+ res);
+        console.log('Token set' + res);
         // Saves user token to localStorage
         localStorage.setItem('token', res.accessToken);
         localStorage.setItem('refresh_token', res.refreshToken);
@@ -60,7 +58,7 @@ export default class AuthService {
     }
 
     getToken() {
-        console.log('Token retrieved'+ localStorage.getItem('token'));
+        console.log('Token retrieved' + localStorage.getItem('token'));
         return localStorage.getItem('token');
     }
 
@@ -73,7 +71,7 @@ export default class AuthService {
 
     getProfile() {
 
-        console.log('Token decoded'+this.getToken());
+        console.log('Token decoded' + this.getToken());
         // Using jwt-decode npm package to decode the token
         return decode(this.getToken());
     }
@@ -86,16 +84,15 @@ export default class AuthService {
             'Content-Type': 'application/json'
         }
 
-        // Setting Authorization header
         // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
         if (this.loggedIn()) {
             headers['Authorization'] = 'Bearer ' + this.getToken();
         }
 
         return fetch(url, {
-            headers,
-            ...options
-        })
+                headers,
+                ...options
+            })
             .then(this._checkStatus)
             .then(response => response.json())
     }

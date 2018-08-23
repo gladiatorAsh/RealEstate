@@ -13,14 +13,26 @@ const ADMIN = config.permissionLevels.ADMIN;
 const PAID = config.permissionLevels.PAID_USER;
 const FREE = config.permissionLevels.NORMAL_USER;
 
-exports.routesConfig = function(app){
+exports.routesConfig = function (app) {
 
-    app.post('/zillow/getRentEstimate', [ZillowController.getRentZestimate]);
-    
+    app.post('/zillow/getRentEstimate', [
+        Validation.validJWTNeeded,
+        Permission.minimumPermissionLevelRequired(FREE),
+        Permission.onlySameUserOrAdminCanDoThisAction,
+        ZillowController.getRentZestimate
+    ]);
+
+    app.post('/zillow/postUserEstimate', [
+        Validation.validJWTNeeded,
+        Permission.minimumPermissionLevelRequired(FREE),
+        //Permission.onlySameUserOrAdminCanDoThisAction,
+        ZillowController.postUserEstimate
+    ]);
+
     app.patch('/zillow/users/:userId', [
         Validation.validJWTNeeded,
         Permission.minimumPermissionLevelRequired(FREE),
         Permission.onlySameUserOrAdminCanDoThisAction,
         UsersController.patchAddressById
-      ]);
+    ]);
 };

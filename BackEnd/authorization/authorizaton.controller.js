@@ -12,18 +12,19 @@ exports.login = (req, res) => {
         let token = jwt.sign(req.body, jwtSecret);
         let b = new Buffer(hash);
         let refresh_token = b.toString('base64');
-        res.status(201).send({accessToken: token, refreshToken: refresh_token,userId: req.body.userId});
+        res.status(201).send({ accessToken: token, refreshToken: refresh_token, userId: req.body.userId });
     } catch (err) {
-        res.status(500).send({errors: err});
+        res.status(500).send({ errors: err });
     }
 };
 
+//ToDo: Implement
 exports.refresh_token = (req, res) => {
     try {
         req.body = req.jwt;
         let token = jwt.sign(req.body, jwtSecret);
-        res.status(201).send({id: token});
+        res.status(201).send({ id: token });
     } catch (err) {
-        res.status(500).send({errors: err});
+        res.status(500).send({ errors: err });
     }
 };

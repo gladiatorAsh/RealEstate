@@ -6,7 +6,7 @@ exports.verifyRefreshBodyField = (req, res, next) => {
     if (req.body && req.body.refresh_token) {
         return next();
     } else {
-        return res.status(400).send({error: 'need to pass refresh_token field'});
+        return res.status(400).send({ error: 'need to pass refresh_token field' });
     }
 };
 
@@ -18,7 +18,7 @@ exports.validRefreshNeeded = (req, res, next) => {
         req.body = req.jwt;
         return next();
     } else {
-        return res.status(400).send({error: 'Invalid refresh token'});
+        return res.status(400).send({ error: 'Invalid refresh token' });
     }
 };
 
@@ -41,5 +41,3 @@ exports.validJWTNeeded = (req, res, next) => {
         return res.status(401).send();
     }
 };
-
-
