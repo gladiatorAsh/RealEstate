@@ -1,8 +1,9 @@
 import decode from 'jwt-decode';
+import config from './config';
 export default class AuthService {
 
     constructor(domain) {
-        this.domain = domain || 'http://localhost:3600' // API server domain
+        this.domain = domain || config.appEndpoint // API server domain
         this.fetch = this.fetch.bind(this);
         this.login = this.login.bind(this);
         this.getProfile = this.getProfile.bind(this);

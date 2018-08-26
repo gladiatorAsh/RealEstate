@@ -6,12 +6,13 @@ import $ from "jquery";
 import AuthService from './AuthService';
 import withAuth from './withAuth';
 import zillowLogo from "./Zillowlogo_200x50.gif"
+import config from './config';
 
 class User extends Component {
     constructor(props) {
         super(props);
 
-        this.domain = 'http://localhost:3600' // API server domain
+        this.domain = config.appEndpoint // API server domain
         this.Auth = new AuthService(this.domain);
 
         this.state = {

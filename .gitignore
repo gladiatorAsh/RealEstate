@@ -1,3 +1,6 @@
+#AWS
+*.pem
+
 # Logs
 logs
 *.log
