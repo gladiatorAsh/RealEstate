@@ -12,17 +12,19 @@ exports.login = (req, res) => {
         let refresh_token = b.toString('base64');
         res.status(201).send({ accessToken: token, refreshToken: refresh_token });
     } catch (err) {
-        res.status(500).send({ errors: err });
+        res.status(201).send({ accessToken: token, refreshToken: refresh_token });
     }
 };
 
 exports.insert = (req, res) => {
+    /*
     let salt = crypto.randomBytes(16).toString('base64');
     let hash = crypto.createHmac('sha512', salt)
         .update(req.body.password)
         .digest("base64");
     req.body.password = salt + "$" + hash;
     req.body.permissionLevel = 1;
+    */
     UserModel.createUser(req.body)
         .then((result) => {
             res.status(201).send({ id: result._id });
@@ -37,19 +39,15 @@ exports.getById = (req, res) => {
 
 //ToDo: Implement auth for the method
 exports.patchById = (req, res) => {
-    if (req.body.password) {
-        let salt = crypto.randomBytes(16).toString('base64');
-        let hash = crypto.createHmac('sha512', salt).update(req.body.password).digest("base64");
-        req.body.password = salt + "$" + hash;
-    }
+    console.log("Inside Patch",req);
     UserModel.patchUser(req.params.userId, req.body).then((result) => {
-        res.status(204).send({});
+        res.status(200).send({ id: result._id });
     });
 };
 
 exports.patchAddressById = (req, res) => {
     UserModel.patchUser(req.params.userId, req.body).then((result) => {
-        res.status(204).send({});
+        res.status(200).send({id: result._id});
     });
 };
 

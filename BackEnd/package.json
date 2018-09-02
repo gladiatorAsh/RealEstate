@@ -8,8 +8,9 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "helmet": "^3.13.0",
+    "ipify": "^2.0.0",
     "jsonwebtoken": "^8.2.0",
     "mathjs": "^5.1.1",
     "mongodb": "^2.2.16",

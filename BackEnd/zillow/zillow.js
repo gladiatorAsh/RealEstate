@@ -33,16 +33,20 @@ exports.getRentEstimate = (req, res) => {
 
 exports.postUserEstimate = (req, res) => {
     try {
-
-        const data = req.body.userEstimate;
-
-        UserModel.patchUser(req.body.userId, {
-            "userExpectation": data
-        }).then((result) => {
+        console.log(req.body);
+        const data = req.body.userExpectation;
+        if (req.body.userId != null) {
+            UserModel.patchUser(req.body.userId, {
+                "userExpectation": data
+            }).then((result) => {
+                mailer.sendEmail(result);
+                res.status(200).send('success');
+            });
+        } else {
             mailer.sendEmail(result);
             res.status(200).send('success');
-        });
 
+        }
     } catch (err) {
         res.status(500).send({
             errors: err

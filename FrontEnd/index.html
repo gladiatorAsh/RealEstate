@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Zillow Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .green{
+            color:green;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" id="dvPersonalDetails">
+        <h3>Personal Details</h3>
+        <form class="form-horizontal" data-toggle="validator" id="frmPersonalDetails" name="frmPersonalDetails">
+            <div class="help-block with-errors"></div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="fname">First Name:</label>
+                <div class="col-sm-5">
+                    <input type="text" pattern="^[A-z]{1,}$" class="form-control" id="fname" placeholder="Enter First Name"
+                        name="fname" required data-error="Please input a name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                <div class="col-sm-5">
+                    <input type="text" pattern="^[A-z]{1,}$" class="form-control" id="lname" placeholder="Enter Last Name"
+                        name="lname" required data-error="Please input a name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+                <div class="col-sm-5">
+                    <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email"
+                        data-error="That email seems to be invalid" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="phone">Phone:</label>
+                <div class="col-sm-3">
+                    <input type="tel" class="form-control" id="phone" placeholder="Enter phone" name="phone" data-error="Please enter phone"
+                        required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="btnSubmitfrmPersonalDetails" class="btn btn-primary" value="Submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container" id="dvAddress" style="display:none">
+
+        <h3>Address</h3>
+        <form class="form-horizontal" data-toggle="validator" id="frmAddress" name="frmAddress">
+            <div class="help-block with-errors"></div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="address1">Address Line 1:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address1" placeholder="Enter Address" name="address1"
+                        required data-error="Please enter Address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="address2">Address Line 2:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="address2" placeholder="Enter Address" name="address2">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="city">City:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="city" placeholder="Enter city" name="city">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="state">State:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="state" placeholder="Enter state" name="state">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="zipcode">Zip:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="zipcode" placeholder="Enter zip" name="zipcode">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="btnSubmitAddress" class="btn btn-primary" value="Submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="container form-horizontal" id="dvStatus" style="display:none">
+        <h3>Zillow Information</h3>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="rentZestimate">Rent Zestimate: </label>
+            <div class="col-sm-10">
+                <span class="rentZestimate" id="rentZestimate"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="rentZestimateLowHigh">Rent Zestimate Range: </label>
+            <div class="col-sm-3">
+                <span class="rentZestimateLow" id="rentZestimateLow"></span>
+                <span class="rentZestimateHigh" id="rentZestimateHigh"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="state">User Estimate:</label>
+            <div class="col-sm-2">
+                <input type="number" min="0" class="form-control" id="userEstimate" placeholder="Enter your Estimate"
+                    name="userEstimate">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="button" id="btnSubmitEstimate" class="btn btn-primary" value="Next">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    <!-- <script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script> -->
+    <script src="index.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // function getIP(json) {
+            //     Zillow.updateIP(json.ip);
+            // }
+
+            Zillow.init();
+
+            $.ajaxSetup({
+                cache: false,
+                tryCount: 0,
+                retryLimit: 3,
+                error: function (xhr, textStatus, errorThrown) {
+                    //$.unblockUI();
+                    //Spin.stopSpin();
+                    // lang = "HI";
+                    if (xhr.status == 404) {
+                        console.log("Service not found");
+                        // toastr.error("Something went wrong!! Please try again later ",
+                        //     "Service Error");
+                        return;
+                    }
+                    if (xhr.status == 401) {
+                        console.log("Unauthorized");
+                        // toastr.error("You are not authorized to perform this operation",
+                        //     "Service Error");
+                        return;
+                    }
+                    if (xhr.status == 400) {
+                        console.log("Bad Request");
+                        // toastr.error(
+                        //     "Error occurred while processing the request. Please try again later ",
+                        //     "Service Error");
+                        return;
+                    }
+                    if (textStatus == "timeout") {
+                        /**
+                         * If timeout occurs, retry; default no. of retries  are 3
+                         * After 3 retries, exit and show error.
+                         */
+                        this.tryCount++;
+                        if (this.tryCount < this.retryLimit) {
+                            $.ajax(this);
+                            return;
+                        } else {
+                            console.log('Repeated timeout error');
+                            // toastr.error("Request timeout. Please try after some time.",
+                            //     "Service Error");
+                            return;
+                        }
+                        if (xhr.status == 500) {
+                            console.log("Internal server error");
+                            // toastr.error(
+                            //     "Error occurred while processing the request , Please try again later.",
+                            //     "Service Error");
+                            return;
+                        } else {
+                            console.log("Please contact the administrator");
+                            // toastr.error("Error occurred while processing the request.",
+                            //     "Service Error");
+                            return;
+                        }
+                    }
+                }
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>

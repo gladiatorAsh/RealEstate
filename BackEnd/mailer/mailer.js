@@ -18,14 +18,17 @@ var mailOptions = {
 };
 
 exports.sendEmail = (req, res) => {
+    console.log('Inside email');
+    console.log(req);
     mailOptions.to = req.email;
-    var msg = "Thank you for using our service.<p> Following are the details of your query :- </p> " +
+    let msg = "Thank you for using our service.<p> Following are the details of your query :- </p> " +
         "<p><b>Property:</b>" + req.address + "</p>" +
         "<p><b>Rent Zestimate:</b>" + req.rentZestimate + "</p>" +
         "<p><b>Rent Zestimate Low:</b>" + req.monthlyLow + "</p>" +
         "<p><b>Rent Zestimate High:</b>" + req.monthlyHigh + "</p>" +
-        "<p><b>Your Expected Rent:</b>" + req.userExpectation ? req.userExpectation : 0 + "</p>";
+        "<p><b>Your Estimated Rent:</b>" + (req.userExpectation == -1 ? "None" : req.userExpectation) + "</p>";
 
+    console.log(msg);
     mailOptions.html = msg;
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

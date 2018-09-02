@@ -5,14 +5,17 @@ const Schema = mongoose.Schema;
 
 
 const userSchema = new Schema({
-    firstName: String,
-    lastName: String,
+    fname: String,
+    lname: String,
     email: String,
-    password: String,
     phone: Number,
     ip: String,
     address: String,
-    permissionLevel: Number,
+    citystatezip: String,
+    city: String,
+    state: String,
+    zipcode:Number,
+    password: String,
     rentZestimate: Number,
     monthlyLow: Number,
     monthlyHigh: Number,
@@ -39,17 +42,25 @@ exports.findById = (id) => {
 };
 
 exports.patchUser = (id, userData) => {
+
+    console.log("Inside Patch 2",userData);
     return new Promise((resolve, reject) => {
 
-        User.findById(id, function(err, user) {
+        User.findById(id, function (err, user) {
             if (err) reject(err);
+            
+            console.log("Patching user - User found");
 
             for (let i in userData) {
                 user[i] = userData[i];
             }
 
-            user.save(function(err, updatedUser) {
+            user.save(function (err, updatedUser) {
                 if (err) return reject(err);
+                console.log("Patching user - User updated"); 
+                console.log(userData);
+
+                console.log(user);
                 resolve(updatedUser);
             });
 
@@ -63,7 +74,7 @@ exports.list = (perPage, page) => {
         User.find()
             .limit(perPage)
             .skip(perPage * page)
-            .exec(function(err, users) {
+            .exec(function (err, users) {
                 if (err) {
                     reject(err);
                 } else {
@@ -74,13 +85,17 @@ exports.list = (perPage, page) => {
 };
 
 exports.findByEmail = (email) => {
-    return User.find({ email: email });
+    return User.find({
+        email: email
+    });
 };
 
 
 exports.removeById = (userId) => {
     return new Promise((resolve, reject) => {
-        User.remove({ _id: userId }, (err) => {
+        User.remove({
+            _id: userId
+        }, (err) => {
             if (err) {
                 reject(err);
             } else {
