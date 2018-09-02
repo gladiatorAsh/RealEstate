@@ -66,16 +66,11 @@ var Zillow = {
         })
     },
     updateIP: function (result) {
-        alert(result);
+        console.log(result);
         Zillow.userIP = result;
     },
     submitPersonalDetails: function (event) {
-        console.log($(this));
-        console.log(event);
-        alert('Inside submit');
-        //$(this).val('Submitted');
-        //Zillow.dvPersonalDetails.hide();
-        //Zillow.dvAddress.show();
+        
         Zillow.getClientIP(this.urlgetClientIP, this.updateIP).then(function (result) {
             var data = Zillow.getFormData(Zillow.frmPersonalDetails);
 
@@ -89,20 +84,15 @@ var Zillow = {
     successPersonalDetails: function (result) {
         Zillow.userId = result.id;
         console.log(Zillow.userId);
-        alert(Zillow.userId);
+        
         Zillow.dvPersonalDetails.hide();
         Zillow.dvAddress.show();
     },
     submitAddress: function (event) {
-        //console.log($(this).val());
-        alert('Inside submit Address');
-        //$(this).val('Submitted');
-        //Zillow.dvAddress.hide();
+        
         var data = Zillow.getFormData(Zillow.frmAddress);
         data.address = data.address1 + " " + data.address2;
         console.log(data);
-        alert(Zillow.userId);
-        alert(Zillow.userIP);
         Zillow.sendUpdate(Zillow.endpoint + Zillow.urlUpdateAddress + Zillow.userId, data, Zillow.successAddress);
         return false;
     },
@@ -122,7 +112,7 @@ var Zillow = {
 
     },
     successRentEstimate: function (result) {
-        alert('Rent shown');
+        
         //Update UI
         if (result == null) {
             alert('Information is unavailable for this address. Please refresh and try another');
@@ -166,7 +156,7 @@ var Zillow = {
         return out;
     },
     getClientIP: function (url, callback) {
-        alert('Inside Client IP');
+        
         var promise = $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
             function (json) {
                 Zillow.updateIP(json.ip);
@@ -179,8 +169,7 @@ var Zillow = {
         return promise;
     },
     sendPost: function (url, data, callback) {
-        alert('Inside send post');
-        alert(url);
+        
         $.ajax({
             type: 'POST',
             url: url,
