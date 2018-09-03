@@ -1,40 +1,31 @@
-    The purpose of the application is to test out Zillow APIs. It is currently under progress. to know more about Zillow APIs, please see -
-    https://www.zillow.com/
+The purpose of the application is to test out Zillow APIs. It is currently under progress. 
+To know more about Zillow APIs, please see - https://www.zillow.com/
 
-
-Testing Process:
+## Testing Process:
 
 1. Run a mongo container. Update the url in config/db.js
-2. Run node server on 3600 and react on 3000
-3. Update config with email, pwd and Zillow token
-4. Creation of account is via API, hence import Postman collection. Create user by the Post Users API.
-5. Use this user to login
+2. Run node server on 3600 and a python server on 8000 to serve html pages
+3. Update config with server details, email, pwd and Zillow token
+
 
 1.   Features built-
         
-        Backend
+        #### Backend
 
             1. API call to get rentzestimate if available or approximate it.
-            2. User authentication and authorization.
-            3. Model validation using mongoose.
-            4. Two tiered service access - Paid and Free.
-            5. Email sent once data has been processed.
+            2. Model validation using mongoose.
+            3. Email sent once data has been processed.
             
-        Front end 
-
-            1. User page to login.
-            2. User page to update user details.
+        #### Front end 
+            1. User page to update user details and get zestimate.
 
 2.  To Do -
-    1. Organize front-end code
-    2. Improve css
-    3. Add validation on front-end
-    4. Handle and log errors on both front-end and back-end
-    5. Implement circuit breaker pattern
-    6. Use phone and email verification service
-    7. Add user account creation page
-    8. Refresh token to generate new token
-    9. Dockerize and deploy
+    1. Improve css
+    2. Add regex validation on front-end for phone
+    3. Handle and log errors on both front-end and back-end
+    4. Implement circuit breaker pattern
+    5. Use phone and email verification service
+    6. Dockerize application for easy deploy
 
 3. Zillow API -
     a. http://www.zillow.com/webservice/GetSearchResults.htm
@@ -61,7 +52,7 @@ Testing Process:
     The last one works the best since I need to know only address and get both zestimate and rentzestimate.
 
 4. Trying to fetch rent estimates for the following addresses - 
-    1. 1314 The Alameda, Apt 132, San Jose, CA
+    1. 1314 The Alameda, Apt 132, San Jose, CA : Result not found
     2. 2925 SW 4th Ave, Portland, OR
     3. 2615 SE 75th Ave, Portland, OR
     4. 7245 N Newell Ave, Portland, OR
@@ -85,16 +76,3 @@ Testing Process:
     22. 301 Rita Ln,Crescent City, FL 32112 : Only Zestimate available 
     23. 1300 The Alameda, San Jose, CA 95126
     24. 2114 Bigelow Ave, Seattle, WA 98109 : RentZestimate available
-
- 
-
-
-
-
-
-
-
-
-
-
-
