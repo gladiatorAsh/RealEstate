@@ -26,6 +26,8 @@ To know more about Zillow APIs, please see - https://www.zillow.com/
     4. Implement circuit breaker pattern
     5. Use phone and email verification service
     6. Dockerize application for easy deploy
+    7. Adding spinner on ajax messages and showing messages to the user using toastr
+
 
 3. Zillow API -
     a. http://www.zillow.com/webservice/GetSearchResults.htm
