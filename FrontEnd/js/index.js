@@ -1,5 +1,7 @@
+//Add dependency loading using require.js
+
 var Zillow = {
-    endpoint: "http://localhost:3600/",
+    endpoint: "http://34.212.106.242:3600/",
 
     urlGetRentEstimate: "zillow/getRentEstimate",
     urlPostPersonalDetails: "users",
@@ -37,13 +39,6 @@ var Zillow = {
     isEstimateSubmitted: false,
 
     init: function () {
-        /*
-        this.btnSubmitfrmPersonalDetails.click(this.submitPersonalDetails);
-        this.btnSubmitAddress.click(this.submitAddress);
-        this.btnSubmitEstimate.click(this.submitStatus);
-        this.frmPersonalDetails.validator().submit(alert('Form validated'));
-        this.frmAddress.validator().submit(alert('Form validated'));
-        */
 
         this.btnSubmitEstimate.click(this.submitStatus);
         this.frmPersonalDetails.validator().on('submit', function (e) {
@@ -53,7 +48,7 @@ var Zillow = {
                 e.preventDefault();
                 Zillow.submitPersonalDetails(e);
             }
-        })
+        });
 
 
         this.frmAddress.validator().on('submit', function (e) {
@@ -63,14 +58,14 @@ var Zillow = {
                 e.preventDefault();
                 Zillow.submitAddress(e);
             }
-        })
+        });
     },
     updateIP: function (result) {
         console.log(result);
         Zillow.userIP = result;
     },
     submitPersonalDetails: function (event) {
-        
+
         Zillow.getClientIP(this.urlgetClientIP, this.updateIP).then(function (result) {
             var data = Zillow.getFormData(Zillow.frmPersonalDetails);
 
@@ -84,12 +79,12 @@ var Zillow = {
     successPersonalDetails: function (result) {
         Zillow.userId = result.id;
         console.log(Zillow.userId);
-        
+
         Zillow.dvPersonalDetails.hide();
         Zillow.dvAddress.show();
     },
     submitAddress: function (event) {
-        
+
         var data = Zillow.getFormData(Zillow.frmAddress);
         data.address = data.address1 + " " + data.address2;
         console.log(data);
@@ -103,7 +98,7 @@ var Zillow = {
             "userId": Zillow.userId,
             "address": Zillow.txtAddress1.val(),
             "citystatezip": Zillow.txtZip.val() || (Zillow.txtCity.val() + "," + Zillow.txtState.val())
-        }
+        };
 
         Zillow.sendPost(Zillow.endpoint + Zillow.urlGetRentEstimate, data, Zillow.successRentEstimate);
 
@@ -112,7 +107,7 @@ var Zillow = {
 
     },
     successRentEstimate: function (result) {
-        
+
         //Update UI
         if (result == null) {
             alert('Information is unavailable for this address. Please refresh and try another');
@@ -120,7 +115,7 @@ var Zillow = {
         }
 
         Zillow.spanRentZestimate.text('$' + result.amount);
-        Zillow.spanRentZestimateHigh.text(' - ' +'$' + result.valuationRange.high);
+        Zillow.spanRentZestimateHigh.text(' - ' + '$' + result.valuationRange.high);
         Zillow.spanRentZestimateLow.text('$' + result.valuationRange.low);
         Zillow.spanRentZestimateLow.addClass('green');
         Zillow.spanRentZestimateHigh.addClass('red');
@@ -129,13 +124,13 @@ var Zillow = {
 
     },
     submitStatus: function (event) {
-        //console.log($(this).val());
+
         $(this).val('Submitted');
-        //Zillow.dvStatus.hide();
+
         var data = {
             "userId": Zillow.userId,
             "userExpectation": Zillow.txtUserEstimate.val() || -1
-        }
+        };
 
         Zillow.sendPost(Zillow.endpoint + Zillow.urlPostUserEstimate, data, this.successStatus);
         alert('An email has been sent about your query today.');
@@ -156,7 +151,7 @@ var Zillow = {
         return out;
     },
     getClientIP: function (url, callback) {
-        
+
         var promise = $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
             function (json) {
                 Zillow.updateIP(json.ip);
@@ -169,7 +164,9 @@ var Zillow = {
         return promise;
     },
     sendPost: function (url, data, callback) {
-        
+        $.blockUI();
+        // Spin.startSpin();
+
         $.ajax({
             type: 'POST',
             url: url,
@@ -179,16 +176,20 @@ var Zillow = {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            success: (result) => {
+            success: function (result) {
+                $.unblockUI();
                 callback(result);
             },
             error: function (err) {
+                $.unblockUI();
                 console.log(err);
             }
         });
     },
     sendUpdate: function (url, data, callback) {
         console.log(data);
+        $.blockUI();
+        //Spin.startSpin();
 
         $.ajax({
             type: 'PATCH',
@@ -200,9 +201,11 @@ var Zillow = {
                 'Content-Type': 'application/json'
             },
             success: function (result) {
+                $.unblockUI();
                 callback(result);
             },
             error: function (err) {
+                $.unblockUI();
                 console.log(err);
             }
 

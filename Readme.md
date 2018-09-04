@@ -3,7 +3,7 @@ To know more about Zillow APIs, please see - https://www.zillow.com/
 
 ## Testing Process:
 
-1. Run a mongo container. Update the url in config/db.js
+1. Run a mongoDB container. Update the url in config/db.js
 2. Run node server on 3600 and a python server on 8000 to serve html pages
 3. Update config with server details, email, pwd and Zillow token
 
@@ -12,7 +12,7 @@ To know more about Zillow APIs, please see - https://www.zillow.com/
         
         #### Backend
 
-            1. API call to get rentzestimate if available or approximate it.
+            1. API call to get rentzestimate if available or approximate it if possible from zestimate.
             2. Model validation using mongoose.
             3. Email sent once data has been processed.
             
