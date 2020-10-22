@@ -13,7 +13,7 @@
     "jsonwebtoken": "^8.2.0",
     "mathjs": "^5.1.1",
     "mongodb": "^2.2.16",
-    "mongoose": "^5.2.9",
+    "mongoose": "^5.7.5",
     "node-uuid": "^1.4.8",
     "nodemailer": "^4.6.8",
     "packages": "0.0.8",
