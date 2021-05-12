@@ -11,7 +11,7 @@
     "express": "^4.16.2",
     "helmet": "^3.13.0",
     "jsonwebtoken": "^8.2.0",
-    "mathjs": "^5.1.1",
+    "mathjs": "^7.5.1",
     "mongodb": "^2.2.16",
     "mongoose": "^5.2.9",
     "node-uuid": "^1.4.8",
