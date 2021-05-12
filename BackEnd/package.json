@@ -15,7 +15,7 @@
     "mongodb": "^2.2.16",
     "mongoose": "^5.2.9",
     "node-uuid": "^1.4.8",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "packages": "0.0.8",
     "request": "^2.88.0",
     "xml2js": "^0.4.19"
